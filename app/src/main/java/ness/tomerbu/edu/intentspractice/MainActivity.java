@@ -19,6 +19,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         etQuery = (EditText) findViewById(R.id.etQuery);
         timePicker = (TimePicker) findViewById(R.id.timePicker);
+
+        Intent intent = getIntent();
+        if (intent!=null) {
+            Bundle intentExtras = intent.getExtras();
+            if (intentExtras!=null) {
+                for (String key : intentExtras.keySet()) {
+                    System.out.println(key);
+                    System.out.println(intentExtras.get(key));
+                }
+                timePicker.setCurrentHour(intentExtras.getInt(AlarmClock.EXTRA_HOUR));
+                timePicker.setCurrentMinute(intentExtras.getInt(AlarmClock.EXTRA_MINUTES));
+            }
+        }
+
+
     }
 
 
@@ -58,5 +73,5 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(alarmIntent);
     }
- 
+
 }
